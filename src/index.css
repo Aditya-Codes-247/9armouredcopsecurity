@@ -1,0 +1,325 @@
+@import "tailwindcss";
+
+:root {
+  --cursor-color: #0A1118;
+  --cursor-color-target: #C5A059;
+}
+
+@theme {
+  --font-serif: "Cinzel", "Playfair Display", serif;
+  --font-editorial: "Playfair Display", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-obsidian: #0A1118;
+  --color-deepNavy: #111A24;
+  --color-gold: #C5A059;
+  --color-gold-light: #E5C98B;
+  --color-gold-dark: #9E7D3B;
+  --color-gold-subtle: #FAF6ED;
+  --color-canvas-white: #FFFFFF;
+  --color-canvas-light: #F8F9FA;
+  --color-canvas-slate: #F0F2F5;
+  --color-canvas-border: #E5E8EC;
+  --breakpoint-xs: 30rem;
+}
+
+/* overflow-x: clip (not hidden) — `hidden` would turn html/body into scroll
+   containers, which breaks position: sticky used by the hero's fullscreen
+   image takeover. `clip` gives the same visual clipping without that cost. */
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: clip;
+  max-width: 100%;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom luxury refinements */
+::selection {
+  background: #C5A059;
+  color: #FFFFFF;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F9FA;
+}
+::-webkit-scrollbar-thumb {
+  background: #C5A059;
+  border-radius: 3px;
+}
+
+.tracking-ultra {
+  letter-spacing: 0.28em;
+}
+
+.tracking-luxury {
+  letter-spacing: 0.18em;
+}
+
+/* Hides scrollbars on horizontal chip/scroll rails while keeping them
+   scrollable (used by the mobile Tactical Division quick chips). */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.editorial-shadow {
+  box-shadow: 0 20px 50px -12px rgba(10, 17, 24, 0.08), 0 1px 3px 0 rgba(10, 17, 24, 0.04);
+}
+
+.glass-nav {
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.74) 0%, rgba(255, 255, 255, 0.44) 55%, rgba(255, 255, 255, 0.6) 100%);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(197, 160, 89, 0.14),
+    0 14px 44px -10px rgba(10, 17, 24, 0.16);
+}
+
+.zoom-container {
+  overflow: hidden;
+}
+.zoom-container img {
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.zoom-container:hover img {
+  transform: scale(1.04);
+}
+
+/* Hero brand identity (relocated from the navbar) ----------------------------
+ * Crest + wordmark fade in on load; the wordmark carries a slow metallic
+ * sheen sweep (same motion as the reference wordmark) painted strictly with
+ * the site palette: obsidian #0A1118, gold-dark #9E7D3B, gold #C5A059,
+ * gold-light #E5C98B.
+ * ------------------------------------------------------------------------- */
+@keyframes brand-fade-rise {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(18px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes brand-shine-sweep {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.brand-fade-in {
+  opacity: 0;
+  animation: brand-fade-rise 1.6s cubic-bezier(0.19, 0.8, 0.24, 1) forwards;
+}
+
+/* Gradient-clipped wordmark: fade-in first, then the infinite sheen sweep.
+   background-repeat stays `repeat` (default) so the 230% wide gradient
+   wraps seamlessly while sweeping. */
+.brand-shine-name {
+  background-image: linear-gradient(
+    100deg,
+    #0A1118 0%,
+    #9E7D3B 24%,
+    #C5A059 44%,
+    #E5C98B 50%,
+    #C5A059 56%,
+    #9E7D3B 76%,
+    #0A1118 100%
+  );
+  background-size: 230% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0;
+  animation:
+    brand-fade-rise 1.6s cubic-bezier(0.19, 0.8, 0.24, 1) 0.35s forwards,
+    brand-shine-sweep 7.5s ease-in-out 2.2s infinite;
+}
+
+/* Plasma backdrop behind the hero intro (React Bits <Plasma/>) ---------------
+ * Gold-tinted WebGL plasma stretching across the full horizontal length of
+ * the page, from the top of the hero down to the end of the intro statement.
+ * A vertical mask fades it in under the navbar and out before the CTA row so
+ * it reads as a soft liquid glow rather than a hard-edged panel.
+ * ------------------------------------------------------------------------- */
+.hero-plasma-backdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 86%, transparent 100%);
+}
+
+/* Scroll-triggered reveal animations for Portfolio Pillar 02+ cards ---------- */
+
+@keyframes card-reveal-up {
+  0% {
+    opacity: 0;
+    transform: translateY(48px) scale(0.97);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes card-reveal-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-48px) scale(0.97);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes card-reveal-right {
+  0% {
+    opacity: 0;
+    transform: translateX(48px) scale(0.97);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes card-reveal-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.88);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes shimmer-gold {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes subtle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+  50% { box-shadow: 0 0 24px 4px rgba(197, 160, 89, 0.15); }
+}
+
+/* Base state for animated elements — hidden by default */
+.scroll-animate {
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+
+.scroll-animate.is-visible {
+  animation-duration: 0.9s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: forwards;
+  animation-delay: var(--scroll-delay, 0ms);
+}
+
+.scroll-animate.is-visible.animate-up { animation-name: card-reveal-up; }
+.scroll-animate.is-visible.animate-left { animation-name: card-reveal-left; }
+.scroll-animate.is-visible.animate-right { animation-name: card-reveal-right; }
+.scroll-animate.is-visible.animate-scale { animation-name: card-reveal-scale; }
+
+/* Staggered children: parent with .scroll-stagger > .scroll-animate child */
+.scroll-stagger > .scroll-animate:nth-child(1) { --scroll-delay: 0ms; }
+.scroll-stagger > .scroll-animate:nth-child(2) { --scroll-delay: 120ms; }
+.scroll-stagger > .scroll-animate:nth-child(3) { --scroll-delay: 240ms; }
+.scroll-stagger > .scroll-animate:nth-child(4) { --scroll-delay: 360ms; }
+.scroll-stagger > .scroll-animate:nth-child(5) { --scroll-delay: 480ms; }
+.scroll-stagger > .scroll-animate:nth-child(6) { --scroll-delay: 600ms; }
+
+/* Gold shimmer on hover for cards */
+.card-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.card-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(197, 160, 89, 0.06) 45%,
+    rgba(229, 201, 139, 0.12) 50%,
+    rgba(197, 160, 89, 0.06) 55%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.card-shimmer:hover::after {
+  opacity: 1;
+  animation: shimmer-gold 1.8s ease-in-out infinite;
+}
+
+/* Subtle float effect for feature icons */
+.float-accent {
+  animation: subtle-float 4s ease-in-out infinite;
+}
+
+/* Pulse glow on hover */
+.hover-pulse {
+  transition: box-shadow 0.4s ease;
+}
+.hover-pulse:hover {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-fade-in,
+  .brand-shine-name {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+  .scroll-animate {
+    opacity: 1;
+    animation: none !important;
+  }
+}
+
