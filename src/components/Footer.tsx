@@ -1,6 +1,6 @@
 import React from 'react';
 import { ASSETS, COMPANY_CONTACT, gmailComposeUrl } from '../data/content';
-import { MapPin, Mail, PhoneCall, Globe, ExternalLink, Briefcase, MessageCircle } from 'lucide-react';
+import { MapPin, Mail, PhoneCall, Globe, ExternalLink, Briefcase, MessageCircle, Instagram, Linkedin } from 'lucide-react';
 
 interface FooterProps {
   onOpenCertificates: () => void;
@@ -58,6 +58,35 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCertificates, onOpenLegal,
                 <span>{COMPANY_CONTACT.website}</span>
                 <ExternalLink className="w-3 h-3 text-[#C5A059]" />
               </a>
+            </div>
+
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#C5A059] block">
+                Connect With Us
+              </span>
+              <div className="space-y-1.5">
+                <a
+                  href={COMPANY_CONTACT.socials.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-medium hover:text-[#C5A059] transition-colors cursor-target"
+                >
+                  <Instagram className="w-3.5 h-3.5 text-[#C5A059]" />
+                  <span>Instagram</span>
+                  <ExternalLink className="w-3 h-3 text-[#0A1118]/30" />
+                </a>
+                <br />
+                <a
+                  href={COMPANY_CONTACT.socials.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-medium hover:text-[#C5A059] transition-colors cursor-target"
+                >
+                  <Linkedin className="w-3.5 h-3.5 text-[#C5A059]" />
+                  <span>LinkedIn</span>
+                  <ExternalLink className="w-3 h-3 text-[#0A1118]/30" />
+                </a>
+              </div>
             </div>
 
             <div className="space-y-1">

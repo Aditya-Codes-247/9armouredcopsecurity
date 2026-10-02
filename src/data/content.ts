@@ -44,7 +44,11 @@ export const COMPANY_CONTACT = {
   hrPhone: '+91 9898557772',
   hrPhoneTel: '+919898557772',
   mapsQueryUrl: 'https://www.google.com/maps/search/?api=1&query=Shed+No-+26,+Maruti+Industrial+Estate+-+2,+SLM+mill+Compound,+Nr.+Vatva+Rly+station+Vatva,+Ahmedabad+382445',
-  hours: '24/7 Rapid Mobilization & Command Dispatch'
+  hours: '24/7 Rapid Mobilization & Command Dispatch',
+  socials: {
+    instagramUrl: 'https://www.instagram.com/9armouredcopsecurity/',
+    linkedinUrl: 'https://www.linkedin.com/in/9armouredcopsecurity-undefined-b033a4436/',
+  }
 };
 
 /**
