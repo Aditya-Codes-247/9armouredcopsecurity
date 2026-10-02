@@ -25,13 +25,13 @@ export const CertificatesModal: React.FC<CertificatesModalProps> = ({ isOpen, on
       regNo: 'CERT-QA-STD-88219',
       status: 'Certified Management System',
       validity: 'Security Guarding, VIP Escort, Cash Logistics & Facility Operations',
-      desc: 'Annual surveillance audit certifying institutional adherence to zero-defect security delivery, standard operating procedures, and rigorous cadre training.'
+      desc: 'Annual surveillance enquiry/audit certifying institutional adherence to zero-defect security delivery, standard operating procedures, and rigorous cadre training.'
     },
     {
       title: 'Statutory Labor Law & Factory Act Compliance',
       authority: 'Office of the Labour Commissioner, Gujarat',
       regNo: 'LAB-GUJ-CONT-441209',
-      status: '100% Audit Cleared',
+      status: '100% Enquiry/Audit Cleared',
       validity: 'Form V, Form XII, Minimum Wages, ESIC & EPFO Reg. GJ/AHM/0038910',
       desc: 'Principal employer indemnification against any joint-liability or labor grievance. Automated biometric wage records disbursed before the 7th of every month.'
     },

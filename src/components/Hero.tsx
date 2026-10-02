@@ -313,7 +313,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAudit }) => {
             id="heroAuditBtn"
             className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-[#F8F9FA] border border-[#E5E8EC] text-[#0A1118] font-medium text-xs tracking-ultra uppercase hover:border-[#C5A059] hover:text-[#C5A059] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer cursor-target shadow-xs"
           >
-            <span>Request Operational Audit</span>
+            <span>Request Operational Enquiry/Audit</span>
           </button>
         </div>
 

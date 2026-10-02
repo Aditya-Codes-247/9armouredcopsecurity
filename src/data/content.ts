@@ -199,7 +199,7 @@ export const ENTERPRISE_OPERATIONS: EnterpriseOperation[] = [
     id: 'op-01',
     category: 'Statutory Governance',
     title: 'Payroll & Compliance Records',
-    desc: 'Flawless workforce payroll processing, Provident Fund (PF), ESIC, Professional Tax, and labor law compliance. Complete statutory audit assurance across Gujarat industrial corridors.',
+    desc: 'Flawless workforce payroll processing, Provident Fund (PF), ESIC, Professional Tax, and labor law compliance. Complete statutory enquiry/audit assurance across Gujarat industrial corridors.',
     features: [
       'Monthly automated biometric wage disbursement',
       'Form V, Form XII, & Factory Act compliance',

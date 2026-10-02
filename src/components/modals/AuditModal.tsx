@@ -53,7 +53,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({
       });
 
       if (!response.ok) {
-        throw new Error('Failed to transmit audit directive to command server.');
+        throw new Error('Failed to transmit enquiry/audit directive to command server.');
       }
 
       setSubmitted(true);
@@ -100,7 +100,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({
               Confidential Consultation
             </span>
             <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#0A1118]">
-              Executive Operational Audit
+              Executive Operational Enquiry/Audit
             </h3>
           </div>
         </div>
@@ -112,7 +112,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({
         {submitted ? (
           <div className="p-8 text-center bg-emerald-50 rounded-2xl border border-emerald-200 space-y-3">
             <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
-            <h4 className="text-lg font-serif font-bold text-emerald-900">Audit Directive Dispatched</h4>
+            <h4 className="text-lg font-serif font-bold text-emerald-900">Enquiry/Audit Directive Dispatched</h4>
             <p className="text-xs text-emerald-800 font-light leading-relaxed">
               Your inquiry has been transmitted directly to 9 Armoured Cop Security Command via priority notification. A designated officer will contact you within 120 minutes.
             </p>
@@ -192,7 +192,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({
                 <option>Corporate Payroll &amp; Statutory Labor Governance</option>
                 <option>Facility Housekeeping &amp; Flexible Staffing</option>
                 <option>Guest House &amp; Healthcare Support Operations</option>
-                <option>Industrial Fire Safety Audit &amp; Mock Drill AMC</option>
+                <option>Industrial Fire Safety Enquiry/Audit &amp; Mock Drill AMC</option>
                 <option>Confidential Corporate Fraud Investigation &amp; Due Diligence</option>
               </select>
             </div>
@@ -216,7 +216,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({
                 disabled={submitting}
                 className="flex-1 py-3.5 rounded-xl bg-[#0A1118] text-white font-serif font-bold text-xs tracking-ultra uppercase hover:bg-[#C5A059] transition-all shadow-md cursor-pointer cursor-target disabled:opacity-75"
               >
-                {submitting ? 'DISPATCHING DIRECTIVE...' : 'TRANSMIT AUDIT DIRECTIVE'}
+                {submitting ? 'DISPATCHING DIRECTIVE...' : 'TRANSMIT ENQUIRY/AUDIT DIRECTIVE'}
               </button>
               <button
                 type="button"

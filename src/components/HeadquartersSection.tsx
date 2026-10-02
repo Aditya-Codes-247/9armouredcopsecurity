@@ -137,7 +137,7 @@ export const HeadquartersSection: React.FC<HeadquartersSectionProps> = ({
                 {COMPANY_CONTACT.infoEmail}
               </a>
               <p className="text-[11px] text-[#0A1118]/60 leading-relaxed font-light mb-4">
-                Discreet communication channel for corporate RFP submissions, labor compliance inquiries, and board-level security audits.
+                Discreet communication channel for corporate RFP submissions, labor compliance inquiries, and board-level security enquiry/audits.
               </p>
             </div>
 
@@ -319,7 +319,7 @@ export const HeadquartersSection: React.FC<HeadquartersSectionProps> = ({
               onClick={onOpenAudit}
               className="flex-1 sm:flex-none px-6 py-3 rounded-full bg-[#C5A059] text-[#0A1118] font-bold text-xs tracking-ultra uppercase hover:bg-[#E5C98B] transition-all whitespace-nowrap shadow-lg flex items-center justify-center gap-2 cursor-pointer cursor-target"
             >
-              <span>Request Operational Audit</span>
+              <span>Request Operational Enquiry/Audit</span>
               <ArrowUpRight className="w-4 h-4" />
             </button>
 

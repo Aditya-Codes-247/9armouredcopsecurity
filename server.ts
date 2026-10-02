@@ -35,7 +35,7 @@ async function startServer() {
       const contactOfficer = officer || officerName || 'Unspecified Officer';
       const contactPhone = phone || 'Not Provided';
       const contactEmail = email || 'Not Provided';
-      const requestedService = service || 'General Operational Security Audit';
+      const requestedService = service || 'General Operational Security Enquiry/Audit';
       const isNdaRequired = ndaChecked !== undefined ? ndaChecked : (ndaRequired !== undefined ? ndaRequired : true);
 
       const timestamp = new Date().toLocaleString('en-IN', {
@@ -46,7 +46,7 @@ async function startServer() {
 
       // Format payload matching: curl -d "<Message Here>" ntfy.sh/9armouredcopsecurity
       const message = [
-        `[9 ARMOURED COP SECURITY SERVICE - OPERATIONAL AUDIT DIRECTIVE]`,
+        `[9 ARMOURED COP SECURITY SERVICE - OPERATIONAL ENQUIRY/AUDIT DIRECTIVE]`,
         `🏢 Corporate Entity: ${entityName}`,
         `👤 Designated Officer: ${contactOfficer}`,
         `📞 Direct Mobile: ${contactPhone}`,
@@ -65,7 +65,7 @@ async function startServer() {
         method: 'POST',
         body: message,
         headers: {
-          'Title': '9 Armoured Cop - Audit Directive Transmitted',
+          'Title': '9 Armoured Cop - Enquiry/Audit Directive Transmitted',
           'Priority': 'urgent',
           'Tags': 'shield,rotating_light,briefcase',
         }
@@ -80,14 +80,14 @@ async function startServer() {
 
       return res.status(200).json({
         success: true,
-        message: 'Audit directive transmitted successfully to 9 Armoured Cop Security Directorate.',
+        message: 'Enquiry/Audit directive transmitted successfully to 9 Armoured Cop Security Directorate.',
         directiveRef: `9AC-${Date.now().toString().slice(-6)}`
       });
     } catch (error: any) {
       console.error('Error dispatching audit directive:', error);
       return res.status(500).json({
         success: false,
-        error: error?.message || 'Failed to dispatch audit directive via backend service.'
+        error: error?.message || 'Failed to dispatch enquiry/audit directive via backend service.'
       });
     }
   });

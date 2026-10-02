@@ -74,7 +74,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                 Direct Engagement
               </span>
               <h2 className="text-2xl xs:text-3xl sm:text-5xl font-serif font-bold text-[#0A1118] mb-3 sm:mb-4">
-                Request a Confidential Security Audit
+                Request a Confidential Security Enquiry/Audit
               </h2>
               <p className="text-[#0A1118]/70 text-xs sm:text-base leading-relaxed font-light">
                 Whether deploying 50 perimeter guards to an industrial plant or retaining close executive protection for a visiting trade delegation, our directors are available 24/7.
@@ -275,7 +275,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                     <option>Corporate Payroll &amp; Statutory Labor Governance</option>
                     <option>Facility Housekeeping &amp; Flexible Staffing</option>
                     <option>Guest House &amp; Healthcare Support Operations</option>
-                    <option>Industrial Fire Safety Audit &amp; Mock Drill AMC</option>
+                    <option>Industrial Fire Safety Enquiry/Audit &amp; Mock Drill AMC</option>
                     <option>Confidential Corporate Fraud Investigation &amp; Due Diligence</option>
                   </select>
                 </div>
@@ -315,7 +315,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                     <span>TRANSMITTING DIRECTIVE...</span>
                   ) : (
                     <>
-                      <span>TRANSMIT AUDIT DIRECTIVE</span>
+                      <span>TRANSMIT ENQUIRY/AUDIT DIRECTIVE</span>
                       <ShieldCheck className="w-4 h-4" />
                     </>
                   )}

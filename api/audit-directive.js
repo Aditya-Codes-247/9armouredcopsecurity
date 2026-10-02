@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     const contactOfficer = officer || officerName || 'Unspecified Officer';
     const contactPhone = phone || 'Not Provided';
     const contactEmail = email || 'Not Provided';
-    const requestedService = service || 'General Operational Security Audit';
+    const requestedService = service || 'General Operational Security Enquiry/Audit';
     const isNdaRequired =
       ndaChecked !== undefined
         ? ndaChecked
@@ -36,7 +36,7 @@ export default async function handler(req, res) {
     });
 
     const message = [
-      `[9 ARMOURED COP SECURITY SERVICE - OPERATIONAL AUDIT DIRECTIVE]`,
+      `[9 ARMOURED COP SECURITY SERVICE - OPERATIONAL ENQUIRY/AUDIT DIRECTIVE]`,
       `🏢 Corporate Entity: ${entityName}`,
       `👤 Designated Officer: ${contactOfficer}`,
       `📞 Direct Mobile: ${contactPhone}`,
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
       method: 'POST',
       body: message,
       headers: {
-        Title: '9 Armoured Cop - Audit Directive Transmitted',
+        Title: '9 Armoured Cop - Enquiry/Audit Directive Transmitted',
         Priority: 'urgent',
         Tags: 'shield,rotating_light,briefcase',
       },
@@ -71,7 +71,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       success: true,
       message:
-        'Audit directive transmitted successfully to 9 Armoured Cop Security Directorate.',
+        'Enquiry/Audit directive transmitted successfully to 9 Armoured Cop Security Directorate.',
       directiveRef: `9AC-${Date.now().toString().slice(-6)}`,
     });
   } catch (error) {
@@ -80,7 +80,7 @@ export default async function handler(req, res) {
       success: false,
       error:
         error?.message ||
-        'Failed to dispatch audit directive via backend service.',
+        'Failed to dispatch enquiry/audit directive via backend service.',
     });
   }
 }

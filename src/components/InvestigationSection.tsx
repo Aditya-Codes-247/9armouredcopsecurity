@@ -72,7 +72,7 @@ export const InvestigationSection: React.FC<InvestigationSectionProps> = ({
                     </div>
                     <div>
                       <h5 className="text-xs font-bold uppercase tracking-wider text-[#0A1118]">
-                        Comprehensive Fire Safety Audits
+                        Comprehensive Fire Safety Enquiry/Audits
                       </h5>
                       <p className="text-xs text-[#0A1118]/70 mt-0.5 sm:mt-1 leading-relaxed">
                         Full compliance verification, heat-map risk modeling, and issuance of NOC regulatory certifications.
@@ -115,10 +115,10 @@ export const InvestigationSection: React.FC<InvestigationSectionProps> = ({
                   Certified by National Fire Safety Council
                 </span>
                 <button
-                  onClick={() => onScheduleAudit('Industrial Fire Safety Audit & Mock Drill AMC')}
+                  onClick={() => onScheduleAudit('Industrial Fire Safety Enquiry/Audit & Mock Drill AMC')}
                   className="text-xs font-bold text-[#C5A059] tracking-luxury uppercase hover:underline flex items-center gap-1 cursor-pointer cursor-target"
                 >
-                  Schedule Audit <ChevronRight className="w-3.5 h-3.5" />
+                  Schedule Enquiry/Audit <ChevronRight className="w-3.5 h-3.5" />
                 </button>
               </div>
               </div>
@@ -171,7 +171,7 @@ export const InvestigationSection: React.FC<InvestigationSectionProps> = ({
                         Internal Fraud &amp; Theft Forensics
                       </h5>
                       <p className="text-xs text-[#0A1118]/70 mt-0.5 sm:mt-1 leading-relaxed">
-                        Supply-chain pilferage tracing, IP infringement audits, and undercover operational plant placement.
+                        Supply-chain pilferage tracing, IP infringement enquiry/audits, and undercover operational plant placement.
                       </p>
                     </div>
                   </div>
@@ -182,7 +182,7 @@ export const InvestigationSection: React.FC<InvestigationSectionProps> = ({
                     </div>
                     <div>
                       <h5 className="text-xs font-bold uppercase tracking-wider text-[#0A1118]">
-                        Commercial Credit &amp; Counterparty Audits
+                        Commercial Credit &amp; Counterparty Enquiry/Audits
                       </h5>
                       <p className="text-xs text-[#0A1118]/70 mt-0.5 sm:mt-1 leading-relaxed">
                         In-depth solvency verification and director reputational risk profiling prior to major mergers or leases.
