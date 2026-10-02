@@ -14,6 +14,7 @@ import { OperationsSection } from './components/OperationsSection';
 import { InvestigationSection } from './components/InvestigationSection';
 import { TrainingAcademySection } from './components/TrainingAcademySection';
 import { ContactSection } from './components/ContactSection';
+import { LocationsSection } from './components/LocationsSection';
 import { HeadquartersSection } from './components/HeadquartersSection';
 import { Footer } from './components/Footer';
 import { CareersPage } from './components/CareersPage';
@@ -125,6 +126,8 @@ export default function App() {
             <TrainingAcademySection />
 
             <ContactSection initialService={auditDefaultService} />
+
+            <LocationsSection />
 
             <HeadquartersSection
               onOpenAudit={() => handleOpenAudit()}

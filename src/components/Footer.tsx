@@ -1,6 +1,6 @@
 import React from 'react';
-import { ASSETS, COMPANY_CONTACT } from '../data/content';
-import { MapPin, Mail, PhoneCall, Globe, ExternalLink, Briefcase } from 'lucide-react';
+import { ASSETS, COMPANY_CONTACT, gmailComposeUrl } from '../data/content';
+import { MapPin, Mail, PhoneCall, Globe, ExternalLink, Briefcase, MessageCircle } from 'lucide-react';
 
 interface FooterProps {
   onOpenCertificates: () => void;
@@ -65,7 +65,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCertificates, onOpenLegal,
                 Direct Email
               </span>
               <a
-                href={`mailto:${COMPANY_CONTACT.email}`}
+                href={gmailComposeUrl(COMPANY_CONTACT.email)}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 font-medium hover:text-[#C5A059] transition-colors cursor-target"
               >
                 <Mail className="w-3.5 h-3.5 text-[#C5A059]" />
@@ -77,13 +79,20 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCertificates, onOpenLegal,
               <span className="text-[10px] font-bold uppercase tracking-wider text-[#C5A059] block">
                 Command Switchboard
               </span>
-              <a
-                href={`tel:${COMPANY_CONTACT.phoneTel}`}
-                className="inline-flex items-center gap-1.5 font-medium hover:text-[#C5A059] transition-colors cursor-target"
-              >
-                <PhoneCall className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>{COMPANY_CONTACT.phone}</span>
-              </a>
+              <div className="space-y-1.5">
+                {COMPANY_CONTACT.directors.map((director) => (
+                  <a
+                    key={director.phoneTel}
+                    href={`tel:${director.phoneTel}`}
+                    className="flex items-center gap-1.5 font-medium hover:text-[#C5A059] transition-colors cursor-target"
+                  >
+                    <PhoneCall className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
+                    <span>
+                      {director.name} : {director.phone}
+                    </span>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -135,23 +144,65 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCertificates, onOpenLegal,
 
         {/* Contact Us Tile */}
         <div className="pt-6 border-t border-[#E5E8EC]">
-          <a
-            href="mailto:info@9armouredcopsecurity.com?subject=General%20Inquiry%20-%209%20Armoured%20Cop%20Security%20Service"
-            className="flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#F8F9FA] border border-[#E5E8EC] hover:border-[#C5A059]/50 hover:bg-[#FAF6ED] transition-all duration-300 group cursor-pointer cursor-target max-w-sm mx-auto"
-          >
-            <div className="w-8 h-8 rounded-full bg-[#0A1118] text-[#C5A059] flex items-center justify-center shrink-0 group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
-              <Mail className="w-4 h-4" />
-            </div>
-            <div className="text-left">
-              <span className="text-[10px] font-bold uppercase tracking-ultra text-[#C5A059] block">
+          <div className="px-6 py-5 rounded-xl bg-[#F8F9FA] border border-[#E5E8EC] max-w-xl mx-auto space-y-4">
+            <div className="flex items-center justify-center gap-2.5">
+              <div className="w-8 h-8 rounded-full bg-[#0A1118] text-[#C5A059] flex items-center justify-center shrink-0">
+                <Mail className="w-4 h-4" />
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-ultra text-[#C5A059]">
                 Contact Us
               </span>
-              <span className="text-xs font-semibold text-[#0A1118] group-hover:text-[#C5A059] transition-colors">
-                info@9armouredcopsecurity.com
-              </span>
             </div>
-            <ExternalLink className="w-3.5 h-3.5 text-[#0A1118]/30 group-hover:text-[#C5A059] transition-colors ml-1" />
-          </a>
+
+            {/* Email -> Gmail compose with To = info@ */}
+            <a
+              href={gmailComposeUrl(
+                COMPANY_CONTACT.infoEmail,
+                'General Inquiry - 9 Armoured Cop Security Service'
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 text-xs font-semibold text-[#0A1118] hover:text-[#C5A059] transition-colors cursor-pointer cursor-target"
+            >
+              <Mail className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
+              <span>{COMPANY_CONTACT.infoEmail}</span>
+              <ExternalLink className="w-3 h-3 text-[#0A1118]/30" />
+            </a>
+
+            {/* Both phone numbers -> tel: + WhatsApp */}
+            <div className="space-y-2">
+              {COMPANY_CONTACT.directors.map((director) => {
+                const waNumber = director.phoneTel.replace('+', '');
+                return (
+                  <div
+                    key={director.phoneTel}
+                    className="flex items-center justify-center gap-2 flex-wrap"
+                  >
+                    <a
+                      href={`tel:${director.phoneTel}`}
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0A1118] hover:text-[#C5A059] transition-colors cursor-pointer cursor-target"
+                    >
+                      <PhoneCall className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
+                      <span>
+                        {director.name} : {director.phone}
+                      </span>
+                    </a>
+                    <a
+                      href={`https://wa.me/${waNumber}?text=Hello%209%20Armoured%20Cop%20Security%20Service`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Chat with ${director.name} on WhatsApp`}
+                      title={`Chat with ${director.name} on WhatsApp`}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#0A1118] text-white text-[10px] font-semibold hover:bg-[#C5A059] transition-colors cursor-pointer cursor-target"
+                    >
+                      <MessageCircle className="w-3 h-3" />
+                      <span>WhatsApp</span>
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
       </div>

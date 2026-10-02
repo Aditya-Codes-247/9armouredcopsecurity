@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Shield, UserCheck, Truck, Cctv, Award, ArrowUpRight, LucideIcon } from 'lucide-react';
+import { Shield, UserCheck, Truck, Cctv, Award, ArrowUpRight, ChevronLeft, ChevronRight, LucideIcon } from 'lucide-react';
 import BorderGlow from './BorderGlow/BorderGlow';
 import DepthCarousel, { DepthCarouselApi, DepthCarouselItem } from './DepthCarousel/DepthCarousel';
 import { borderGlowDark } from '../theme/glowTokens';
@@ -130,6 +130,9 @@ export const ProtectionSection: React.FC<ProtectionSectionProps> = ({
   /* Jump the pinned journey to a chosen division (mobile chips). */
   const scrollToDivision = (idx: number) => {
     setSelectedIndex(idx);
+    // Keep the 3D stack in sync immediately for click/arrow navigation,
+    // then smooth-scroll the pinned journey so scroll-scrub stays in sync.
+    carouselApiRef.current?.goTo(idx, true);
     const region = regionRef.current;
     if (!region) return;
     const vh = window.innerHeight || 1;
@@ -138,6 +141,18 @@ export const ProtectionSection: React.FC<ProtectionSectionProps> = ({
     const p = TACTICAL_DIVISIONS.length > 1 ? idx / (TACTICAL_DIVISIONS.length - 1) : 0;
     const regionTop = region.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top: regionTop + p * total, behavior: 'smooth' });
+  };
+
+  /* Arrow navigation — drives the scroll journey (source of truth) so the
+     depth stack, progress bar, counter and chips all stay in sync. */
+  const goPrev = () => {
+    const prev = (selectedIndex - 1 + TACTICAL_DIVISIONS.length) % TACTICAL_DIVISIONS.length;
+    scrollToDivision(prev);
+  };
+
+  const goNext = () => {
+    const next = (selectedIndex + 1) % TACTICAL_DIVISIONS.length;
+    scrollToDivision(next);
   };
 
   /* Depth carousel slides — every division keeps its full card content:
@@ -257,8 +272,8 @@ export const ProtectionSection: React.FC<ProtectionSectionProps> = ({
                 ease="power3.out"
                 autoplay={false}
                 loop={false}
-                showControls
-                showIndicators
+                showControls={false}
+                showIndicators={false}
                 disableWheel
                 onChange={(idx) => setSelectedIndex(idx)}
                 onApi={(api) => {
@@ -266,6 +281,37 @@ export const ProtectionSection: React.FC<ProtectionSectionProps> = ({
                   api.scrubTo(progressRef.current);
                 }}
               />
+              {/* Working navigation arrows — drive the scroll journey */}
+              <button
+                type="button"
+                onClick={goPrev}
+                aria-label="Previous division"
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-[3000] w-10 h-10 sm:w-11 sm:h-11 grid place-items-center rounded-full border border-white/20 bg-[#0A1118]/60 backdrop-blur-md text-white hover:bg-[#C5A059] hover:text-[#0A1118] hover:border-[#C5A059] transition-all cursor-pointer cursor-target"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                type="button"
+                onClick={goNext}
+                aria-label="Next division"
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-[3000] w-10 h-10 sm:w-11 sm:h-11 grid place-items-center rounded-full border border-white/20 bg-[#0A1118]/60 backdrop-blur-md text-white hover:bg-[#C5A059] hover:text-[#0A1118] hover:border-[#C5A059] transition-all cursor-pointer cursor-target"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+              {/* Working dot indicators — drive the scroll journey */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[3000] flex gap-2 px-3 py-2 rounded-full bg-[#0A1118]/40 backdrop-blur-md">
+                {TACTICAL_DIVISIONS.map((div, i) => (
+                  <button
+                    key={div.id}
+                    type="button"
+                    onClick={() => scrollToDivision(i)}
+                    aria-label={`Go to ${div.name}`}
+                    className={`h-[7px] rounded-full transition-all cursor-pointer cursor-target ${
+                      selectedIndex === i ? 'w-5 bg-white' : 'w-[7px] bg-white/40 hover:bg-white/70'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
 
             {/* Visible journey progress (driven by vertical scroll) */}

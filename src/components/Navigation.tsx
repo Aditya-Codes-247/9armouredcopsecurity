@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, PhoneCall, Mail, ChevronRight } from 'lucide-react';
-import { ASSETS, COMPANY_CONTACT } from '../data/content';
+import { ASSETS, COMPANY_CONTACT, gmailComposeUrl } from '../data/content';
 
 interface NavigationProps {
   onOpenAudit?: () => void;
@@ -19,7 +19,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenAudit }) => {
     { label: 'SURVEILLANCE', href: '#investigation', id: 'investigation', num: '04' },
     { label: 'ACADEMY', href: '#training', id: 'training', num: '05' },
     { label: 'AUDIT INTAKE', href: '#contact', id: 'contact', num: '06' },
-    { label: 'HEADQUARTERS', href: '#headquarters', id: 'headquarters', num: '07' },
+    { label: 'ABOUT US', href: '#locations', id: 'locations', num: '07' },
   ];
 
   // Monitor scroll progress, sticky state, and active section
@@ -32,7 +32,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenAudit }) => {
       setScrolled(winScroll > 30);
 
       // Section scroll spy
-      const sections = ['headquarters', 'contact', 'training', 'investigation', 'operations', 'protection', 'home'];
+      const sections = ['headquarters', 'locations', 'contact', 'training', 'investigation', 'operations', 'protection', 'home'];
       const scrollPos = winScroll + 200;
 
       for (const sectionId of sections) {
@@ -147,7 +147,9 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenAudit }) => {
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center space-x-4 lg:space-x-5 xl:space-x-7 text-xs xl:text-sm font-semibold tracking-wider xl:tracking-ultra text-[#0A1118]/80">
             {navLinks.map((item) => {
-              const isActive = activeSection === item.id;
+              const isActive =
+                activeSection === item.id ||
+                (item.id === 'locations' && activeSection === 'headquarters');
               return (
                 <a
                   key={item.label}
@@ -206,7 +208,9 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenAudit }) => {
             {/* Nav list */}
             <div className="flex flex-col space-y-1">
               {navLinks.map((item) => {
-                const isActive = activeSection === item.id;
+                const isActive =
+                  activeSection === item.id ||
+                  (item.id === 'locations' && activeSection === 'headquarters');
                 return (
                   <a
                     key={item.label}
@@ -232,20 +236,25 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenAudit }) => {
 
             {/* Mobile Contact Quick Links */}
             <div className="pt-3 border-t border-[#E5E8EC] space-y-2 text-xs">
-              <a
-                href={`tel:${COMPANY_CONTACT.phoneTel}`}
-                className="flex items-center justify-between py-2 px-3 rounded-lg bg-[#F8F9FA] hover:bg-[#FAF6ED] text-[#0A1118] transition-colors cursor-target"
-              >
-                <span className="flex items-center gap-2 text-[#0A1118]/80 font-medium">
-                  <PhoneCall className="w-3.5 h-3.5 text-[#C5A059]" /> {COMPANY_CONTACT.phone}
-                </span>
-                <span className="text-[9px] uppercase font-bold text-[#C5A059] tracking-wider">
-                  24/7 Line
-                </span>
-              </a>
+              {COMPANY_CONTACT.directors.map((director) => (
+                <a
+                  key={director.phoneTel}
+                  href={`tel:${director.phoneTel}`}
+                  className="flex items-center justify-between py-2 px-3 rounded-lg bg-[#F8F9FA] hover:bg-[#FAF6ED] text-[#0A1118] transition-colors cursor-target"
+                >
+                  <span className="flex items-center gap-2 text-[#0A1118]/80 font-medium">
+                    <PhoneCall className="w-3.5 h-3.5 text-[#C5A059]" /> {director.phone}
+                  </span>
+                  <span className="text-[9px] uppercase font-bold text-[#C5A059] tracking-wider">
+                    24/7 Line
+                  </span>
+                </a>
+              ))}
 
               <a
-                href={`mailto:${COMPANY_CONTACT.email}`}
+                href={gmailComposeUrl(COMPANY_CONTACT.email)}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 py-2 px-3 rounded-lg text-[#0A1118]/70 hover:text-[#C5A059] transition-colors text-[11px] cursor-target"
               >
                 <Mail className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />

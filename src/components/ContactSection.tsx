@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, PhoneCall, Mail, ShieldCheck, CheckCircle2, Globe, ExternalLink } from 'lucide-react';
-import { REGIONAL_HUBS, COMPANY_CONTACT } from '../data/content';
+import { REGIONAL_HUBS, COMPANY_CONTACT, gmailComposeUrl } from '../data/content';
 import { ConsultationFormData } from '../types';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -113,12 +113,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                   <h4 className="text-xs font-bold uppercase tracking-wider text-[#0A1118]">
                     Direct Enterprise Line
                   </h4>
-                  <p className="text-xs text-[#0A1118]/70 mt-1">
-                    <a href={`tel:${COMPANY_CONTACT.phoneTel}`} className="hover:text-[#C5A059] transition-colors cursor-target font-semibold text-[#0A1118] text-sm">
-                      {COMPANY_CONTACT.phone}
-                    </a>
+                  <div className="mt-1 space-y-1">
+                    {COMPANY_CONTACT.directors.map((director) => (
+                      <a
+                        key={director.phoneTel}
+                        href={`tel:${director.phoneTel}`}
+                        className="hover:text-[#C5A059] transition-colors cursor-target font-semibold text-[#0A1118] text-sm block"
+                      >
+                        {director.phone}
+                      </a>
+                    ))}
                     <span className="block text-[11px] text-[#0A1118]/60 mt-0.5">24/7 Command Dispatch &amp; Operations Support</span>
-                  </p>
+                  </div>
                 </div>
               </div>
 
@@ -131,7 +137,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                     Secure Communications
                   </h4>
                   <p className="text-xs text-[#0A1118]/70 mt-1 break-all xs:break-normal">
-                    <a href={`mailto:${COMPANY_CONTACT.email}`} className="hover:text-[#C5A059] transition-colors cursor-target font-medium text-[#0A1118]">
+                    <a
+                      href={gmailComposeUrl(COMPANY_CONTACT.email)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#C5A059] transition-colors cursor-target font-medium text-[#0A1118]"
+                    >
                       {COMPANY_CONTACT.email}
                     </a>
                   </p>

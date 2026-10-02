@@ -35,8 +35,28 @@ export const COMPANY_CONTACT = {
   country: 'India',
   phone: '+91-9157092555',
   phoneTel: '+919157092555',
+  directors: [
+    { name: 'D S Pandey', phone: '+91 9898557772', phoneTel: '+919898557772' },
+    { name: 'Vinay Singh Parihar', phone: '+91 9081607192', phoneTel: '+919081607192' },
+  ],
+  infoEmail: 'info@9armouredcopsecurity.com',
+  careersEmail: 'careers@9armouredcopsecurity.com',
+  hrPhone: '+91 9898557772',
+  hrPhoneTel: '+919898557772',
   mapsQueryUrl: 'https://www.google.com/maps/search/?api=1&query=Shed+No-+26,+Maruti+Industrial+Estate+-+2,+SLM+mill+Compound,+Nr.+Vatva+Rly+station+Vatva,+Ahmedabad+382445',
   hours: '24/7 Rapid Mobilization & Command Dispatch'
+};
+
+/**
+ * Build a Gmail web-compose URL so clicking an email always opens
+ * Gmail's compose page (mailto: does nothing when no desktop mail
+ * client is installed).
+ */
+export const gmailComposeUrl = (to: string, subject = '', body = '') => {
+  const params = new URLSearchParams({ view: 'cm', fs: '1', to });
+  if (subject) params.set('su', subject);
+  if (body) params.set('body', body);
+  return `https://mail.google.com/mail/?${params.toString()}`;
 };
 
 export const TACTICAL_DIVISIONS: TacticalDivision[] = [

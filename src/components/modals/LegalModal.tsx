@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, ShieldAlert, FileText, PhoneCall } from 'lucide-react';
+import { gmailComposeUrl, COMPANY_CONTACT } from '../../data/content';
 
 interface LegalModalProps {
   title: string | null;
@@ -76,8 +77,28 @@ export const LegalModal: React.FC<LegalModalProps> = ({ title, isOpen, onClose }
                 We maintain an independent, whistle-blower protected Ethics Ombudsman for reporting any deviation from statutory wage compliance, workplace safety, or operational misconduct.
               </p>
               <div className="p-4 rounded-xl bg-[#F8F9FA] border border-[#E5E8EC] space-y-1.5 font-mono text-[11px]">
-                <div><span className="font-bold">Confidential Line:</span> +91-9157092555</div>
-                <div><span className="font-bold">Direct Email:</span> 9armouredcopsecurity@gmail.com</div>
+                <div>
+                  <span className="font-bold">Confidential Line 1: </span>
+                  <a href="tel:+919081607192" className="hover:text-[#C5A059] transition-colors">
+                    +91 9081607192
+                  </a>
+                </div>
+                <div>
+                  <span className="font-bold">Confidential Line 2: </span>
+                  <a href="tel:+919898557772" className="hover:text-[#C5A059] transition-colors">
+                    +91 9898557772
+                  </a>
+                </div>
+                <div><span className="font-bold">Direct Email:</span>{' '}
+                  <a
+                    href={gmailComposeUrl(COMPANY_CONTACT.email)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#C5A059] hover:underline"
+                  >
+                    9armouredcopsecurity@gmail.com
+                  </a>
+                </div>
                 <div><span className="font-bold">Available:</span> 24 Hours · Dedicated Directorate Officer</div>
               </div>
             </>

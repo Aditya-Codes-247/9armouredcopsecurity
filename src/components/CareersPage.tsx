@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowLeft, Mail, ArrowUpRight } from 'lucide-react';
 import careersImg from '../assets/images/careers.png';
+import { gmailComposeUrl, COMPANY_CONTACT } from '../data/content';
 
 interface CareersPageProps {
   onBack: () => void;
@@ -98,7 +99,13 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onBack }) => {
               {/* CTA */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                 <a
-                  href="mailto:careers@9armouredcopsecurity.com?subject=Career%20Application%20-%209%20Armoured%20Cop%20Security%20Service"
+                  href={gmailComposeUrl(
+                    COMPANY_CONTACT.careersEmail,
+                    'Career Application - 9 Armoured Cop Security Service',
+                    'Full Name:\nPhone:\nPosition Applied For:\n'
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#0A1118] text-white font-bold text-xs tracking-ultra uppercase hover:bg-[#C5A059] transition-all duration-300 shadow-lg cursor-pointer cursor-target"
                 >
                   <Mail className="w-4 h-4" />
@@ -106,7 +113,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onBack }) => {
                   <ArrowUpRight className="w-4 h-4" />
                 </a>
                 <a
-                  href="tel:+919157092555"
+                  href="tel:+919898557772"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#F8F9FA] border border-[#E5E8EC] text-[#0A1118] font-bold text-xs tracking-ultra uppercase hover:border-[#C5A059] hover:text-[#C5A059] transition-all duration-300 cursor-pointer cursor-target"
                 >
                   <span>Call HR Department</span>
@@ -116,7 +123,12 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onBack }) => {
               <p className="mt-6 text-[11px] text-[#0A1118]/50 font-light">
                 Send your resume to{' '}
                 <a
-                  href="mailto:careers@9armouredcopsecurity.com"
+                  href={gmailComposeUrl(
+                    COMPANY_CONTACT.careersEmail,
+                    'Career Application'
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="font-semibold text-[#C5A059] hover:underline cursor-target"
                 >
                   careers@9armouredcopsecurity.com
